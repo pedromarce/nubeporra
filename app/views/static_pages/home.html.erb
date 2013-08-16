@@ -1,0 +1,53 @@
+<%- model_class = Game -%>
+<div class="page-header">
+  <h1>Partits</h1>
+</div>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Accio</th>
+      <th>Partit</th>
+      <th>Tancament</th>
+      <th>Aposta</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @games.each do |game| %>
+      <tr>
+        <td>
+          <% if game.closeTime > Time.new.inspect %>
+            <% if game.bets.where(user_id: current_user.id).exists? %>
+              <%= link_to "Cambiar",
+              edit_game_bet_path(game.id,game.bets.where(user_id: current_user.id).take(1)[0].id),
+              :class => 'btn btn-primary' %>
+            <% else %>
+              <%= link_to "Jugar",
+              new_game_bet_path(game.id),
+              :class => 'btn btn-primary' %>
+            <% end %>
+          <% else %>
+              <%= link_to "Tancat",
+              game_bets_path(game.id),
+              :class => 'btn btn-primary' %>
+          <% end %>  
+        </td>
+        <td><%= game.description %></td>
+        <td><%= game.closeTime %></td>
+        <td>
+          <% if game.bets.where(user_id: current_user.id).exists? %>
+            <%= game.bets.where(user_id: current_user.id).take(1)[0].score1 %>
+            <% if game.numscore >= 2 %>
+             - <%= game.bets.where(user_id: current_user.id).take(1)[0].score2 %>
+            <% end %>
+            <% if game.numscore >= 3 %>
+             - <%= game.bets.where(user_id: current_user.id).take(1)[0].score3 %>
+            <% end %>
+
+          <% end %>  
+        </td>
+
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Nubeporra</title>
+  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+  <div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+      <div class="container">
+        <a class="brand" href="#">NubePorra</a>
+        <p class="text-right">
+            <% if user_signed_in? %>
+	          Estas logat com <%= current_user.email %>. No ets tu?
+	          <%= link_to "Tanca sessio", destroy_user_session_path, :method => :delete %>
+	        <% else %>
+	          <%= link_to "Registra't", new_user_registration_path %> o 
+	          <%= link_to "Inicia sessio", new_user_session_path %>
+	        <% end %>
+	    </p>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <%= render 'layouts/flash_messages' %>  
+    <%= yield %>
+  </div>
+
+</body>
+</html>

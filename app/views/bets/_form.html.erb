@@ -1,0 +1,29 @@
+<%= form_for [@game, @bet], :html => { :class => 'form-horizontal' } do |f| %>
+  <div class="control-group">
+    <%= f.label :score1, :class => 'control-label' %>
+    <div class="controls">
+      <%= collection_select(:bet, :score1, @bet.game.scoretype.Scoretypevalues.all, :id, :value, options={:class => "selectpicker"}) %>
+    </div>
+  </div>
+  <% if @bet.game.numscore >= 2 %>
+    <div class="control-group">
+      <%= f.label :score2, :class => 'control-label' %>
+      <div class="controls">
+        <%= collection_select(:bet, :score2, @bet.game.scoretype.Scoretypevalues.all, :id, :value, options={:class   => "selectpicker"}) %>
+      </div>
+    </div>
+  <% end %>
+  <% if @bet.game.numscore >= 3 %>
+    <div class="control-group">
+      <%= f.label :score3, :class => 'control-label' %>
+      <div class="controls">
+        <%= collection_select(:bet, :score3, @bet.game.scoretype.Scoretypevalues.all, :id, :value, options={:class => "selectpicker"}) %>
+      </div>
+    </div>
+  <% end %>
+  <div class="form-actions">
+    <%= f.submit nil, :class => 'btn btn-primary' %>
+    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                home_path, :class => 'btn' %>
+  </div>
+<% end %>

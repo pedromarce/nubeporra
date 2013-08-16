@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  description: MyString
+  score1: MyString
+  score2: MyString
+  score3: MyString
+  closeTime: 2013-08-16 00:43:44
+  gameTime: 2013-08-16 00:43:44
+
+two:
+  description: MyString
+  score1: MyString
+  score2: MyString
+  score3: MyString
+  closeTime: 2013-08-16 00:43:44
+  gameTime: 2013-08-16 00:43:44

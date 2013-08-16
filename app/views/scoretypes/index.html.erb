@@ -1,0 +1,23 @@
+<h1>Listing scoretypes</h1>
+
+<table>
+  <tr>
+    <th>Description</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @scoretypes.each do |scoretype| %>
+  <tr>
+    <td><%= scoretype.description %></td>
+    <td><%= link_to 'Show', scoretype %></td>
+    <td><%= link_to 'Edit', edit_scoretype_path(scoretype) %></td>
+    <td><%= link_to 'Destroy', scoretype, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Scoretype', new_scoretype_path %>

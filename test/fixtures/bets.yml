@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  score1: MyString
+  score2: MyString
+  score3: MyString
+  betTime: 2013-08-16 02:06:35
+
+two:
+  score1: MyString
+  score2: MyString
+  score3: MyString
+  betTime: 2013-08-16 02:06:35

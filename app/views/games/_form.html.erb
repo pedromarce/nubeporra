@@ -1,0 +1,56 @@
+<%= form_for @game, :html => { :class => 'form-horizontal' } do |f| %>
+  <div class="control-group">
+    <%= f.label :description, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :description, :class => 'text_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :scoretype_id, :class => 'control-label' %>
+    <div class="controls">
+      <%= collection_select(:game, :scoretype_id, Scoretype.all, :id, :description, options={:class => "selectpicker"}) %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :numscore, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.number_field :numscore, :class => 'text_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :score1, :class => 'control-label' %>
+    <div class="controls">
+      <%= collection_select(:game, :score1, @game.scoretype.Scoretypevalues.all, :id, :value, options={:class => "selectpicker"}) %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :score2, :class => 'control-label' %>
+    <div class="controls">
+      <%= collection_select(:game, :score2, @game.scoretype.Scoretypevalues.all, :id, :value, options={:class => "selectpicker"}) %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :score3, :class => 'control-label' %>
+    <div class="controls">
+      <%= collection_select(:game, :score3, @game.scoretype.Scoretypevalues.all, :id, :value, options={:class => "selectpicker"}) %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :closeTime, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.datetime_select :closeTime, :class => 'datetime_select' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :gameTime, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.datetime_select :gameTime, :class => 'datetime_select' %>
+    </div>
+  </div>
+
+  <div class="form-actions">
+    <%= f.submit nil, :class => 'btn btn-primary' %>
+    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                games_path, :class => 'btn' %>
+  </div>
+<% end %>

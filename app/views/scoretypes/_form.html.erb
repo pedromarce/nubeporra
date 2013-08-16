@@ -1,0 +1,21 @@
+<%= form_for(@scoretype) do |f| %>
+  <% if @scoretype.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@scoretype.errors.count, "error") %> prohibited this scoretype from being saved:</h2>
+
+      <ul>
+      <% @scoretype.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :description %><br />
+    <%= f.text_field :description %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
