@@ -2,9 +2,13 @@ Nubeporra::Application.routes.draw do
 
   devise_for :users
 
-  #resources :games do
-  #  resources :bets
-  #end
+  resources :games do
+    resources :bets
+  end
+
+  resources :scoretypes do
+    resources :scoretypevalues
+  end
 
   root :to =>            'static_pages#home'
 
