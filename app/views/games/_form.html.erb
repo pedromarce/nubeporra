@@ -20,19 +20,19 @@
   <div class="control-group">
     <%= f.label :score1, :class => 'control-label' %>
     <div class="controls">
-      <%= collection_select(:game, :score1, @game.scoretype.Scoretypevalues.all, :id, :value, options={:class => "selectpicker"}) %>
+      <%= collection_select(:game, :score1, @game.scoretype.Scoretypevalues.all, :value, :value, options={:class => "selectpicker"}) %>
     </div>
   </div>
   <div class="control-group">
     <%= f.label :score2, :class => 'control-label' %>
     <div class="controls">
-      <%= collection_select(:game, :score2, @game.scoretype.Scoretypevalues.all, :id, :value, options={:class => "selectpicker"}) %>
+      <%= collection_select(:game, :score2, @game.scoretype.Scoretypevalues.all, :value, :value, options={:class => "selectpicker"}) %>
     </div>
   </div>
   <div class="control-group">
     <%= f.label :score3, :class => 'control-label' %>
     <div class="controls">
-      <%= collection_select(:game, :score3, @game.scoretype.Scoretypevalues.all, :id, :value, options={:class => "selectpicker"}) %>
+      <%= collection_select(:game, :score3, @game.scoretype.Scoretypevalues.all, :value, :value, options={:class => "selectpicker"}) %>
     </div>
   </div>
   <div class="control-group">

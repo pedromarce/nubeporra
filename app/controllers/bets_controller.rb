@@ -5,7 +5,7 @@ class BetsController < ApplicationController
   # GET /bets.json
   def index
     @game = Game.find(params[:game_id])
-    @bets = Bet.all
+    @bets = @game.bets
 
     respond_to do |format|
       format.html # index.html.erb
