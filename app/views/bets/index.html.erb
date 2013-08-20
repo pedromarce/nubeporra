@@ -14,6 +14,7 @@
 <table class="table table-striped">
   <thead>
     <tr>
+      <th>Punts</th>
       <th>Jugador</th>
       <th>Resultat</th>
       <th>Jugada el</th>
@@ -21,7 +22,8 @@
   </thead>
   <tbody>
     <% @bets.each do |bet| %>
-    <tr>
+    <tr <% if bet.scored? %> class="info" <% end %>>
+      <td><%= bet.user.numpoints %></td>
       <td><%= bet.user.username %></td>
       <td>
         <%= bet.score1 %>

@@ -11,23 +11,17 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130816040305) do
+ActiveRecord::Schema.define(:version => 20130820220635) do
 
   create_table "bets", :force => true do |t|
     t.string   "score1"
     t.string   "score2"
     t.string   "score3"
     t.datetime "betTime"
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
     t.integer  "user_id"
     t.integer  "game_id"
-    t.integer  "score_type_1_id"
-    t.integer  "score_type_2_id"
-    t.integer  "score_type_3_id"
-    t.integer  "scoretype1_id"
-    t.integer  "scoretype2_id"
-    t.integer  "scoretype3_id"
     t.integer  "scoretype_id"
   end
 
@@ -42,21 +36,8 @@ ActiveRecord::Schema.define(:version => 20130816040305) do
     t.datetime "updated_at",   :null => false
     t.integer  "scoretype_id"
     t.integer  "numscore"
-  end
-
-  create_table "score_type_values", :force => true do |t|
-    t.integer  "score_type_id"
-    t.string   "value"
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
-  end
-
-  add_index "score_type_values", ["score_type_id"], :name => "index_score_type_values_on_scoreType_id"
-
-  create_table "score_types", :force => true do |t|
-    t.string   "description"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.integer  "numpoint"
+    t.boolean  "closed"
   end
 
   create_table "scoretypes", :force => true do |t|
