@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130820220635) do
+ActiveRecord::Schema.define(:version => 20130821172028) do
 
   create_table "bets", :force => true do |t|
     t.string   "score1"
@@ -69,6 +69,7 @@ ActiveRecord::Schema.define(:version => 20130820220635) do
     t.datetime "created_at",                             :null => false
     t.datetime "updated_at",                             :null => false
     t.string   "username"
+    t.string   "timezone"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

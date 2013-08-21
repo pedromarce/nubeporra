@@ -15,11 +15,7 @@ class BetsController < ApplicationController
   # GET /bets/1
   # GET /bets/1.json
   def show
-    @bet = Bet.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-    end
+    redirect_to game_bets_path, :game_id => params[:game_id]
   end
 
   # GET /bets/new
@@ -38,6 +34,9 @@ class BetsController < ApplicationController
   def edit
     @game = Game.find(params[:game_id])
     @bet = Bet.find(params[:id])
+    if @game.closeTime.past? 
+      redirect_to game_bets_path, :game_id => params[:game_id], notice: 'El partit ja esta tancat.'
+    end
   end
 
   # POST /bets
@@ -50,7 +49,7 @@ class BetsController < ApplicationController
 
     respond_to do |format|
       if @bet.save
-        format.html { redirect_to home_path, notice: 'Bet was successfully created.' }
+        format.html { redirect_to home_path, notice: 'La teva aposta esta registrada.' }
       else
         format.html { render action: "new" }
       end

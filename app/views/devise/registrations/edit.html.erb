@@ -13,6 +13,10 @@
   <div><%= f.label :username %><br />
   <%= f.text_field :username %></div>
 
+
+  <div><%= f.label :timezone %><br />
+  <%= f.time_zone_select :timezone, ActiveSupport::TimeZone.all %>
+
   <div><%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
   <%= f.password_field :password, :autocomplete => "off" %></div>
 

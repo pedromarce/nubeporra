@@ -9,7 +9,7 @@ class User < ActiveRecord::Base
 
   has_many :bets
 
-  attr_accessible :email, :username, :password, :password_confirmation, :remember_me
+  attr_accessible :email, :username, :password, :password_confirmation, :remember_me, :timezone
   # attr_accessible :title, :body
 
   def numpoints
