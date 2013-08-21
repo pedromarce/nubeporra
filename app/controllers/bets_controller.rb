@@ -1,6 +1,7 @@
 class BetsController < ApplicationController
   before_filter :authenticate_user!
-  
+  before_filter :gameClosed?, :only => [:new, :create, :update, :edit]
+
   # GET /bets
   # GET /bets.json
   def index
@@ -34,9 +35,6 @@ class BetsController < ApplicationController
   def edit
     @game = Game.find(params[:game_id])
     @bet = Bet.find(params[:id])
-    if @game.closeTime.past? 
-      redirect_to game_bets_path, :game_id => params[:game_id], notice: 'El partit ja esta tancat.'
-    end
   end
 
   # POST /bets
@@ -59,6 +57,7 @@ class BetsController < ApplicationController
   # PUT /bets/1
   # PUT /bets/1.json
   def update
+    @game = Game.find(params[:game_id])
     @bet = Bet.find(params[:id])
 
     respond_to do |format|
@@ -80,4 +79,17 @@ class BetsController < ApplicationController
       format.html { redirect_to bets_url }
     end
   end
+
+  private
+
+  def gameClosed?
+
+    @game = Game.find(params[:game_id])
+
+    if @game.closeTime.past? 
+      redirect_to game_bets_path, :game_id => params[:game_id], notice: 'El partit ja esta tancat.'
+    end
+
+  end
+
 end
