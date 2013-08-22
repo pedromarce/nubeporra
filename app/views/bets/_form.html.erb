@@ -2,14 +2,14 @@
   <div class="control-group">
     <%= f.label :score1, :class => 'control-label' %>
     <div class="controls">
-      <%= collection_select(:bet, :score1, @bet.game.scoretype.Scoretypevalues.order('scoretypevalues.value').all, :value, :value, options={:class => "selectpicker"}) %>
+      <%= select(:game, :score1, Settings[@bet.game.typescore], options={:class => "selectpicker"}) %>
     </div>
   </div>
   <% if @bet.game.numscore >= 2 %>
     <div class="control-group">
       <%= f.label :score2, :class => 'control-label' %>
       <div class="controls">
-        <%= collection_select(:bet, :score2, @bet.game.scoretype.Scoretypevalues.order('scoretypevalues.value').all, :value, :value, options={:class   => "selectpicker"}) %>
+        <%= select(:game, :score2, Settings[@bet.game.typescore], options={:class => "selectpicker"}) %>
       </div>
     </div>
   <% end %>
@@ -17,7 +17,7 @@
     <div class="control-group">
       <%= f.label :score3, :class => 'control-label' %>
       <div class="controls">
-        <%= collection_select(:bet, :score3, @bet.game.scoretype.Scoretypevalues.order('scoretypevalues.value').all, :value, :value, options={:class => "selectpicker"}) %>
+        <%= select(:game, :score3, Settings[@bet.game.typescore], options={:class => "selectpicker"}) %>
       </div>
     </div>
   <% end %>
