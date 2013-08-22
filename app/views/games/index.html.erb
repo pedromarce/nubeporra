@@ -7,9 +7,7 @@
     <tr>
       <th><%= model_class.human_attribute_name(:id) %></th>
       <th><%= model_class.human_attribute_name(:description) %></th>
-      <th><%= model_class.human_attribute_name(:score1) %></th>
-      <th><%= model_class.human_attribute_name(:score2) %></th>
-      <th><%= model_class.human_attribute_name(:score3) %></th>
+      <th><%= model_class.human_attribute_name(:typescore) %></th>
       <th><%= model_class.human_attribute_name(:closeTime) %></th>
       <th><%= model_class.human_attribute_name(:gameTime) %></th>
       <th><%= model_class.human_attribute_name(:created_at) %></th>
@@ -21,9 +19,7 @@
       <tr>
         <td><%= link_to game.id, game_path(game) %></td>
         <td><%= game.description %></td>
-        <td><%= game.score1 %></td>
-        <td><%= game.score2 %></td>
-        <td><%= game.score3 %></td>
+        <td><%= game.typescore %></td>
         <td><%= game.closeTime %></td>
         <td><%= game.gameTime %></td>
         <td><%=l game.created_at %></td>
