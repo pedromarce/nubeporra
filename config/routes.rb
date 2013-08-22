@@ -14,6 +14,8 @@ Nubeporra::Application.routes.draw do
 
   match '/home',     to: 'static_pages#home'
 
+  match '/users/:id/bets',  to: 'bets#user'
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

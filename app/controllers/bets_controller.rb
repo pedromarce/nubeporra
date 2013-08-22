@@ -2,6 +2,14 @@ class BetsController < ApplicationController
   before_filter :authenticate_user!
   before_filter :gameClosed?, :only => [:new, :create, :update, :edit]
 
+
+  def user
+    @user = User.find(params[:id])
+    @bets = @user.bets.select { |bet| !bet.game.gameClosed? }
+    
+    render action: 'index'
+  end
+
   # GET /bets
   # GET /bets.json
   def index

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130821172028) do
+ActiveRecord::Schema.define(:version => 20130822160049) do
 
   create_table "bets", :force => true do |t|
     t.string   "score1"
@@ -32,28 +32,13 @@ ActiveRecord::Schema.define(:version => 20130821172028) do
     t.string   "score3"
     t.datetime "closeTime"
     t.datetime "gameTime"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
-    t.integer  "scoretype_id"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
     t.integer  "numscore"
     t.integer  "numpoint"
     t.boolean  "closed"
+    t.string   "typescore"
   end
-
-  create_table "scoretypes", :force => true do |t|
-    t.string   "description"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
-  end
-
-  create_table "scoretypevalues", :force => true do |t|
-    t.string   "value"
-    t.integer  "scoretype_id"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
-  end
-
-  add_index "scoretypevalues", ["scoretype_id"], :name => "index_scoretypevalues_on_scoretype_id"
 
   create_table "users", :force => true do |t|
     t.string   "email",                  :default => "", :null => false

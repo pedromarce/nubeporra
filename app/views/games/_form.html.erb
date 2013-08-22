@@ -6,9 +6,9 @@
     </div>
   </div>
   <div class="control-group">
-    <%= f.label :scoretype_id, :class => 'control-label' %>
+    <%= f.label :typescore, :class => 'control-label' %>
     <div class="controls">
-      <%= collection_select(:game, :scoretype_id, Scoretype.all, :id, :description, options={:class => "selectpicker"}) %>
+      <%= select(:game, :typescore, Settings.typeScore, options={:class => "selectpicker"}) %>
     </div>
   </div>
   <div class="control-group">
@@ -33,19 +33,19 @@
   <div class="control-group">
     <%= f.label :score1, :class => 'control-label' %>
     <div class="controls">
-      <%= collection_select(:game, :score1, @game.scoretype.Scoretypevalues.all, :value, :value, options={:class => "selectpicker"}) %>
+      <%= select(:game, :score1, Settings[@game.typescore], options={:class => "selectpicker"}) %>
     </div>
   </div>
   <div class="control-group">
     <%= f.label :score2, :class => 'control-label' %>
     <div class="controls">
-      <%= collection_select(:game, :score2, @game.scoretype.Scoretypevalues.all, :value, :value, options={:class => "selectpicker"}) %>
+      <%= select(:game, :score2, Settings[@game.typescore], options={:class => "selectpicker"}) %>
     </div>
   </div>
   <div class="control-group">
     <%= f.label :score3, :class => 'control-label' %>
     <div class="controls">
-      <%= collection_select(:game, :score3, @game.scoretype.Scoretypevalues.all, :value, :value, options={:class => "selectpicker"}) %>
+      <%= select(:game, :score3, Settings[@game.typescore], options={:class => "selectpicker"}) %>
     </div>
   </div>
   <div class="control-group">
