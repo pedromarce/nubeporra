@@ -1,0 +1,37 @@
+<%- model_class = Boxing -%>
+
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.titleize %></h1>
+  <h2><%= @boxing.description %></h2>
+</div>
+
+<div class="row">
+  <div class="span4">
+    <h3>Classificacio</h3>
+    <table class="table table-striped table-condensed table-bordered">
+      <thead>
+        <tr>
+          <th>Jugador</th>
+          <th>Punts Boxing</th>
+          <th>Punts</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @standings.each do |user| %>
+        <tr>
+          <td><%= user.username %></td>
+          <td><%= @boxing.numpoints(user) %></td>
+          <td><%= user.numpoints %></td>
+        </tr>
+        <% end %>
+
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="form-actions">
+  <%= link_to t('.back', :default => t("helpers.links.back")),
+              home_path, :class => 'btn'  %>
+</div>
+

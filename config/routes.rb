@@ -1,5 +1,11 @@
 Nubeporra::Application.routes.draw do
 
+  resources :boxings do
+    member do
+      get 'standing'
+    end
+  end
+
   devise_for :users
 
   resources :games do

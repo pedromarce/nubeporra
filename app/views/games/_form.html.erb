@@ -6,6 +6,12 @@
     </div>
   </div>
   <div class="control-group">
+    <%= f.label :closed, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.check_box :closed %>
+    </div>
+  </div>  
+  <div class="control-group">
     <%= f.label :typescore, :class => 'control-label' %>
     <div class="controls">
       <%= select(:game, :typescore, Settings.typeScore, options={:class => "selectpicker"}) %>
@@ -18,34 +24,33 @@
     </div>
   </div>  
   <div class="control-group">
-    <%= f.label :closed, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.check_box :closed %>
-    </div>
-  </div>  
-
-  <div class="control-group">
     <%= f.label :numscore, :class => 'control-label' %>
     <div class="controls">
       <%= f.number_field :numscore, :class => 'text_field' %>
     </div>
   </div>
   <div class="control-group">
+    <%= f.label :boxing_id, :class => 'control-label' %>
+    <div class="controls">
+      <%= collection_select(:game, :boxing_id, Boxing.all, :id, :description, options={:include_blank => true, :class => "selectpicker"}) %>
+    </div>
+  </div>
+  <div class="control-group">
     <%= f.label :score1, :class => 'control-label' %>
     <div class="controls">
-      <%= select(:game, :score1, Settings[@game.typescore], options={:class => "selectpicker"}) %>
+      <%= select(:game, :score1, Settings[@game.typescore], options={:include_blank => true, :class => "selectpicker"}) %>
     </div>
   </div>
   <div class="control-group">
     <%= f.label :score2, :class => 'control-label' %>
     <div class="controls">
-      <%= select(:game, :score2, Settings[@game.typescore], options={:class => "selectpicker"}) %>
+      <%= select(:game, :score2, Settings[@game.typescore], options={:include_blank => true, :class => "selectpicker"}) %>
     </div>
   </div>
   <div class="control-group">
     <%= f.label :score3, :class => 'control-label' %>
     <div class="controls">
-      <%= select(:game, :score3, Settings[@game.typescore], options={:class => "selectpicker"}) %>
+      <%= select(:game, :score3, Settings[@game.typescore], options={:include_blank => true, :class => "selectpicker"}) %>
     </div>
   </div>
   <div class="control-group">

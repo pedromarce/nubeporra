@@ -24,6 +24,12 @@
     </div>
   </div>
   <div class="control-group">
+    <%= f.label :boxing_id, :class => 'control-label' %>
+    <div class="controls">
+      <%= collection_select(:game, :boxing_id, Boxing.all, :id, :description, options={:include_blank => true, :class => "selectpicker"}) %>
+    </div>
+  </div>
+  <div class="control-group">
     <%= f.label :closeTime, :class => 'control-label' %>
     <div class="controls">
       <%= f.datetime_select :closeTime, :class => 'datetime_select' %>

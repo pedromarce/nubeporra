@@ -13,10 +13,7 @@ class User < ActiveRecord::Base
   # attr_accessible :title, :body
 
   def numpoints
-  	points = 0
-  	self.bets.each do |bet|
-      points += bet.game.numpoint if bet.scored?      
-  	end
-  	return points
+    self.bets.reduce(0) { |points,bet| bet.scored? ? points += bet.game.numpoint : points }
   end  
+
 end

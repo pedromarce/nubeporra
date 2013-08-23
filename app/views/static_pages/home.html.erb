@@ -1,4 +1,3 @@
-<%- model_class = Game -%>
 <div class="row">
   <div class="span8">
     <h1>Partits</h1>
@@ -9,6 +8,7 @@
           <th>Partit</th>
           <th>Tancament</th>
           <th>Aposta</th>
+          <th>Boxing</th>
         </tr>
       </thead>
       <tbody>
@@ -34,17 +34,30 @@
           <td><%= game.description %></td>
           <td><%= game.closeTime %></td>
           <td>
-            <% if game.bets.where(user_id: current_user.id).exists? %>
-            <%= game.bets.where(user_id: current_user.id).take(1)[0].score1 %>
+            <% if game.userbet(current_user).valid? %>
+            <%= game.userbet(current_user).score1 %>
             <% if game.numscore >= 2 %>
-            - <%= game.bets.where(user_id: current_user.id).take(1)[0].score2 %>
+            - <%= game.userbet(current_user).score2 %>
             <% end %>
             <% if game.numscore >= 3 %>
-            - <%= game.bets.where(user_id: current_user.id).take(1)[0].score3 %>
+            - <%= game.userbet(current_user).score3 %>
             <% end %>
 
             <% end %>  
           </td>
+
+          <td>
+            <% if game.boxing %>
+            <% if game.closeTime.past? %>
+            <%= link_to game.boxing.description,
+            standing_boxing_path(game.boxing.id),
+            :class => 'btn btn-info' %>
+            <% else %>
+              <%= game.boxing.description %>
+            <% end %>              
+            <% end %>
+          </td>  
+
 
         </tr>
         <% end %>
