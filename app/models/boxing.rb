@@ -7,7 +7,7 @@ class Boxing < ActiveRecord::Base
     points = 0
     self.games.each do |game|
     	bet = game.userbet(user)
-    	(points += bet.scored? ? bet.game.numpoint : 0) if bet.valid?
+    	(points += bet.scored? ? bet.game.numpoint : 0) if bet
     end
     points
   end

@@ -34,7 +34,7 @@
           <td><%= game.description %></td>
           <td><%= game.closeTime %></td>
           <td>
-            <% if game.userbet(current_user).valid? %>
+            <% if game.userbet(current_user) %>
             <%= game.userbet(current_user).score1 %>
             <% if game.numscore >= 2 %>
             - <%= game.userbet(current_user).score2 %>
