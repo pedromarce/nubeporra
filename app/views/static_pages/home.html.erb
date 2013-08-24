@@ -7,8 +7,8 @@
           <th>Accio</th>
           <th>Partit</th>
           <th>Aposta</th>
-          <th>Tancament</th>
           <th>Hora Partit</th>
+          <th>Tancament</th>
           <th>Boxing</th>
         </tr>
       </thead>
@@ -45,8 +45,8 @@
 
             <% end %>  
           </td>
-          <td><%= game.closeTime %></td>
           <td><%= game.gameTime %></td>
+          <td><%= game.closeTime %></td>
           <td>
             <% if game.boxing %>
             <%= link_to game.boxing.description,
