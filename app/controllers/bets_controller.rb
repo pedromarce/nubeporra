@@ -49,6 +49,10 @@ class BetsController < ApplicationController
   # POST /bets.json
   def create
     @game = Game.find(params[:game_id])
+    if @game.userbet(current_user)
+      redirect_to home_path, notice: 'La teva aposta ja esta existeix, entra un altre cop per canviar-la.'
+      return
+    end
     @bet = Bet.new(params[:bet])
     @bet.game = @game
     @bet.user = current_user
