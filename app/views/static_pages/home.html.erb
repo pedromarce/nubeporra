@@ -6,8 +6,9 @@
         <tr>
           <th>Accio</th>
           <th>Partit</th>
-          <th>Tancament</th>
           <th>Aposta</th>
+          <th>Tancament</th>
+          <th>Hora Partit</th>
           <th>Boxing</th>
         </tr>
       </thead>
@@ -32,7 +33,6 @@
             <% end %>  
           </td>
           <td><%= game.description %></td>
-          <td><%= game.closeTime %></td>
           <td>
             <% if game.userbet(current_user) %>
             <%= game.userbet(current_user).score1 %>
@@ -45,7 +45,8 @@
 
             <% end %>  
           </td>
-
+          <td><%= game.closeTime %></td>
+          <td><%= game.gameTime %></td>
           <td>
             <% if game.boxing %>
             <%= link_to game.boxing.description,
