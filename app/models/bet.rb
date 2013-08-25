@@ -10,12 +10,12 @@ class Bet < ActiveRecord::Base
   end
 
   def score
-  	score = self.score1
+  	score = self.score1 if self.score1
   	if self.game.numscore >= 2
-      score += (' - ' + self.score2)
+      score += (' - ' + self.score2) if self.score2
   	end
   	if self.game.numscore >= 3
-      score += (' - ' + self.score3)
+      score += (' - ' + self.score3) if self.score3
     end
     score
   end
