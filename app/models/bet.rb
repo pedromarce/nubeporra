@@ -9,6 +9,21 @@ class Bet < ActiveRecord::Base
     return (self.game.closed? and self.game.score1 == self.score1 and (self.game.numscore < 2 or self.game.score2 == self.score2) and (self.game.numscore < 3 or self.game.score3 == self.score3)) 
   end
 
+  def secondscored?
+    if !self.game.closed?
+      return false
+    end
+    case self.game.typescore
+    when 'Futbol'
+      return (((self.game.score1 > self.game.score2) and (self.score1 > self.score2)) or ((self.game.score1 < self.game.score2) and (self.score1 < self.score2)) or ((self.game.score1 == self.game.score2) and (self.score1 == self.score2)))
+    when ('Formula1' or 'MotoGP' or 'Moto2' or 'Moto3')
+      return self.game.score1 == self.score1
+    else
+      return false
+    end
+  end
+
+
   def score
   	score = self.score1 if self.score1
   	if self.game.numscore >= 2
@@ -18,6 +33,16 @@ class Bet < ActiveRecord::Base
       score += (' - ' + self.score3) if self.score3
     end
     score
+  end
+
+  def totalpoints
+    points = 0
+    if self.scored?
+      points = self.game.numpoint
+    elsif self.secondscored?
+      points = self.game.secondpoint
+    end
+    points
   end
 
 end
