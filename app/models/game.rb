@@ -8,4 +8,16 @@ class Game < ActiveRecord::Base
   def userbet(user)
   	self.bets.where(:user_id => user).first
   end
+
+  def score
+  	score = self.score1
+  	if self.numscore >= 2
+      score += (' - ' + self.score2)
+    end
+  	if self.numscore >= 3
+      score += (' - ' + self.score3)
+    end
+    score    
+  end
+
 end

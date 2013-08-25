@@ -12,7 +12,7 @@ class BoxingsController < ApplicationController
 
   def standing
     @boxing = Boxing.find(params[:id])
-    @standings = User.all.sort_by { |user| @boxing.numpoints user}
+    @standings = User.all.sort_by { |user| (@boxing.numpoints user) * -1}
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @boxing }

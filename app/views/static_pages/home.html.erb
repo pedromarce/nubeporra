@@ -7,6 +7,7 @@
           <th>Accio</th>
           <th>Partit</th>
           <th>Aposta</th>
+          <th>Resultat</th>
           <th>Hora Partit</th>
           <th>Tancament</th>
           <th>Boxing</th>
@@ -17,13 +18,13 @@
         <tr>
           <td>
             <% if game.closeTime.past? %>
-            <%= link_to "Tancat",
+            <%= link_to 'Tancat',
             game_bets_path(game.id),
             :class => 'btn btn-primary' %>
             <% else %>
-            <% if game.bets.where(user_id: current_user.id).exists? %>
+            <% if game.userbet(current_user) %>
             <%= link_to "Cambiar",
-            edit_game_bet_path(game.id,game.bets.where(user_id: current_user.id).take(1)[0].id),
+            edit_game_bet_path(game.id,game.userbet(current_user).id),
             :class => 'btn btn-primary' %>
             <% else %>
             <%= link_to "Jugar",
@@ -35,16 +36,10 @@
           <td><%= game.description %></td>
           <td>
             <% if game.userbet(current_user) %>
-            <%= game.userbet(current_user).score1 %>
-            <% if game.numscore >= 2 %>
-            - <%= game.userbet(current_user).score2 %>
-            <% end %>
-            <% if game.numscore >= 3 %>
-            - <%= game.userbet(current_user).score3 %>
-            <% end %>
-
+            <%= game.userbet(current_user).score %>
             <% end %>  
           </td>
+          <td><%= game.score %></td>
           <td><%= game.gameTime %></td>
           <td><%= game.closeTime %></td>
           <td>
@@ -54,8 +49,6 @@
             :class => 'btn btn-info' %>
             <% end %>
           </td>  
-
-
         </tr>
         <% end %>
       </tbody>
