@@ -16,7 +16,13 @@ class Bet < ActiveRecord::Base
     case self.game.typescore
     when 'Futbol'
       return (((self.game.score1 > self.game.score2) and (self.score1 > self.score2)) or ((self.game.score1 < self.game.score2) and (self.score1 < self.score2)) or ((self.game.score1 == self.game.score2) and (self.score1 == self.score2)))
-    when ('Formula1' or 'MotoGP' or 'Moto2' or 'Moto3')
+    when 'Formula1' 
+      return self.game.score1 == self.score1
+    when 'MotoGP' 
+      return self.game.score1 == self.score1
+    when 'Moto2' 
+      return self.game.score1 == self.score1
+    when 'Moto3'
       return self.game.score1 == self.score1
     else
       return false
