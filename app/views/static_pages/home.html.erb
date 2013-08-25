@@ -15,7 +15,7 @@
       </thead>
       <tbody>
         <% @games.each do |game| %>
-        <tr>
+        <tr <% if game.userbet(current_user) and game.userbet(current_user).scored? %> class="info" <% end %>>
           <td>
             <% if game.closeTime.past? %>
             <%= link_to 'Tancat',
