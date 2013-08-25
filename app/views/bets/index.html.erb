@@ -16,7 +16,7 @@
     <% @bets.each do |bet| %>
     <tr   <% if bet.scored? %> 
             class="success" 
-          <% elsif bet.secondscored?  %>>
+          <% elsif bet.secondscored?  %>
             class="info" 
           <% end %>>
       <td><%= bet.user.numpoints %></td>

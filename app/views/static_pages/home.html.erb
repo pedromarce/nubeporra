@@ -18,7 +18,7 @@
         <tr 
           <% if game.userbet(current_user) and game.userbet(current_user).scored? %> 
             class="success" 
-          <% elsif game.userbet(current_user) and game.userbet(current_user).secondscored?  %>>
+          <% elsif game.userbet(current_user) and game.userbet(current_user).secondscored?  %>
             class="info" 
           <% end %>>
           <td>
