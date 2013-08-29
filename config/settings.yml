@@ -1,4 +1,4 @@
-typeScore: ['Futbol', 'Basquet', 'Formula1', 'MotoGP', 'Moto2', 'Moto3', 'Baseball', 'Hoquei', 'Futbol America']
+typeScore: ['Futbol', 'Basquet', 'Formula1', 'MotoGP', 'Moto2', 'Moto3', 'Baseball', 'Hoquei', 'Futbol_America','Sorteig_Champions']
 
 Futbol: [0,1,2,3,4,5,6,7,8,9,10,11,12]
 
@@ -11,3 +11,5 @@ MotoGP: ['Marquez','Pedrosa','Lorenzo','Rossi','Dovizioso','Hayden','Edwards','B
 Moto2: ['Redding','Espargaro','Rabat','Aegerter','Kallio','Zarco','Nakagami','Torres','Terol','Corsi','Simeon','Luthi','De Angelis','Simon','West','Pasini']
 
 Moto3: ['Rins','Marquez','Vinales','Folguer','Salom','Sissis','Khairuddin','Oliveira','Fenati','Kornfeil','Ajo','Masbou','Techer','Loi','Ferrari','Antonelli']
+
+Sorteig_Champions: ['--Bombo2','Shaktar','Milan','Schalke','O.Marsella','CSKA','PSG','Juventus','--Bombo3','Zenit','Man City','Ajax','B.Dortmund','Basilea','Olympiacos','Galatasaray','B.Leverkusen','--Bombo4','Copenhague','Napoli','Anderlecht','Celtic','S.Bucarest','Viktoria Plzen','Austria Viena']
