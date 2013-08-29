@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130823101636) do
+ActiveRecord::Schema.define(:version => 20130825224449) do
 
   create_table "bets", :force => true do |t|
     t.string   "score1"
@@ -45,6 +45,7 @@ ActiveRecord::Schema.define(:version => 20130823101636) do
     t.boolean  "closed"
     t.string   "typescore"
     t.integer  "boxing_id"
+    t.integer  "secondpoint"
   end
 
   create_table "users", :force => true do |t|
