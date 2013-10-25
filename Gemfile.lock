@@ -48,6 +48,9 @@ GEM
     execjs (1.4.0)
       multi_json (~> 1.0)
     hike (1.2.3)
+    httparty (0.10.2)
+      multi_json (~> 1.0)
+      multi_xml (>= 0.5.2)
     i18n (0.6.5)
     journey (1.0.4)
     jquery-rails (3.0.4)
@@ -65,6 +68,8 @@ GEM
       treetop (~> 1.4.8)
     mime-types (1.24)
     multi_json (1.7.9)
+    multi_xml (0.5.3)
+    nokogiri (1.5.6)
     orm_adapter (0.4.0)
     pg (0.16.0)
     polyglot (0.3.3)
@@ -138,8 +143,10 @@ PLATFORMS
 DEPENDENCIES
   coffee-rails (~> 3.2.1)
   devise
+  httparty
   jquery-rails
   less-rails
+  nokogiri
   pg
   rails (= 3.2.14)
   rails_12factor

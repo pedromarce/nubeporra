@@ -22,6 +22,9 @@ Nubeporra::Application.routes.draw do
 
   match '/users/:id/bets',  to: 'bets#user'
 
+  match '/football/:date/matchsday',  to: 'footballscoreapi#matchsday'
+
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

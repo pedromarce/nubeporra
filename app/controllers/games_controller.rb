@@ -3,8 +3,9 @@ class GamesController < ApplicationController
   # GET /games
   # GET /games.json
   def index
-    @games = Game.all
-
+#    @games = Game.all
+    @games = Game.order('"gameTime"').where(:gameTime => 5.days.ago..60.days.from_now)
+    
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @games }
