@@ -14,7 +14,7 @@ class Bet < ActiveRecord::Base
       return false
     end
     case self.game.typescore
-      when 'Futbol'
+      when ('Futbol' or 'Fubol_Sala' or 'Hoquei' or 'Hoquei_Gel')
         return (((self.game.score1 > self.game.score2) and (self.score1 > self.score2)) or ((self.game.score1 < self.game.score2) and (self.score1 < self.score2)) or ((self.game.score1 == self.game.score2) and (self.score1 == self.score2)))
       when 'Formula1' 
         return self.game.score1 == self.score1
@@ -26,6 +26,8 @@ class Bet < ActiveRecord::Base
         return self.game.score1 == self.score1
       when 'Basquet'
         return ((self.game.score1.to_i - self.score1.to_i).abs <= 2)
+      when ('Rugby' or 'Fubol_America' or 'Handball')  
+        return ((self.game.score1.to_i - self.score1.to_i).abs <= 1)
       when 'Sorteig_Champions'
         return ((self.game.score1 == self.score1) or (self.game.score2 == self.score2) or (self.game.score3 == self.score3))
       else
