@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 gem 'rails', '3.2.14'
 
-gem 'devise'
+gem 'devise', '3.0.2'
 gem "rails_config"
 
 gem 'httparty'
