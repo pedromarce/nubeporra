@@ -1,0 +1,24 @@
+<div class="page-header">
+  <h1>Partits Dia NBA</h1>
+</div>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>'Id'</th>
+      <th>'Local'</th>
+      <th>'Visitant'</th>
+      <th>'Resultat'</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @games.each do |game| %>
+      <tr>
+        <td><%= game['id'] %></td>
+        <td><%= game['AwayTeam']['name'] %></td>
+        <td><%= game['HomeTeam']['name'] %></td>
+        <td><%= game['AwayTeam']['score'] %>  - <%= game['HomeTeam']['score'] %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+

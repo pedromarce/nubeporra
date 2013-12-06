@@ -22,7 +22,12 @@ Nubeporra::Application.routes.draw do
 
   match '/users/:id/bets',  to: 'bets#user'
 
+  # Format of date is YYYY-MM-DD
   match '/football/:date/matchsday',  to: 'footballscoreapi#matchsday'
+
+
+  # Format of date is YYYYMMDD
+  match '/nba/:date/matchsday',  to: 'nbascoreapi#matchsday'
 
 
   # The priority is based upon order of creation:
