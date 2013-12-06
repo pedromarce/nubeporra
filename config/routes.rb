@@ -20,14 +20,15 @@ Nubeporra::Application.routes.draw do
 
   match '/home',     to: 'static_pages#home'
 
-  match '/users/:id/bets',  to: 'bets#user'
+  get '/users/:id/bets',  to: 'bets#user'
+
+  # Format of date is Offset from Today's date
+  get '/scores/:date/nba',  to: 'scoreapis#nba'
 
   # Format of date is YYYY-MM-DD
-  match '/football/:date/matchsday',  to: 'footballscoreapi#matchsday'
+  get '/scores/:date/football',  to: 'scoreapis#football'
 
 
-  # Format of date is YYYYMMDD
-  match '/nba/:date/matchsday',  to: 'nbascoreapi#matchsday'
 
 
   # The priority is based upon order of creation:
