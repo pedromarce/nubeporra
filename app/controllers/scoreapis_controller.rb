@@ -3,8 +3,8 @@ class ScoreapisController < ApplicationController
   
   def football
     api = Scoreapi.new
-    @games = []
-    games = api.football(params[:date])
+    time = Time.now()
+    games = api.football(time.strftime('%Y-%m-%d'))
     @games = games.parsed_response['matches'] if games.parsed_response['matches']
 
     respond_to do |format|
