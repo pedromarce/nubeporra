@@ -18,15 +18,15 @@ Nubeporra::Application.routes.draw do
 
   root :to =>            'static_pages#home'
 
-  match '/home',     to: 'static_pages#home'
+  get '/home',     to: 'static_pages#home'
 
   get '/users/:id/bets',  to: 'bets#user'
 
   # Format of date is Offset from Today's date
-  get '/scores/:date/nba',  to: 'scoreapis#nba'
+  get '/scores/:date/nba',  to: 'scoreapis#nba', as: :nba
 
   # Format of date is YYYY-MM-DD
-  get '/scores/:date/football',  to: 'scoreapis#football'
+  get '/scores/:date/football',  to: 'scoreapis#football', as: :football
 
 
 

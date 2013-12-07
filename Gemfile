@@ -1,30 +1,28 @@
 source 'https://rubygems.org'
 
-gem 'rails', '3.2.14'
+gem 'rails', '4.0.2'
 
-gem 'devise', '3.0.2'
+gem 'devise', '3.2.2'
 gem "rails_config"
 
 gem 'httparty'
 gem 'nokogiri'
+
+gem 'protected_attributes'
+gem 'activeresource'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 group :development do
   gem 'sqlite3'
+  gem 'spring'
 end
 
-# Gems used only for assets and not required
-# in production environments by default.
-group :assets do
-  # See https://github.com/sstephenson/execjs#readme for more supported runtimes
-  # gem 'therubyracer', :platforms => :ruby
 
-  gem 'uglifier', '>= 1.0.3'
-  gem "therubyracer"
-  gem "less-rails"
-end
+gem 'uglifier', '>= 1.0.3'
+gem "therubyracer"
+gem "less-rails"
 
 group :production do
   gem 'pg'
