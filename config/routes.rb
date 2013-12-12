@@ -28,8 +28,9 @@ Nubeporra::Application.routes.draw do
   # Format of date is YYYY-MM-DD
   get '/scores/:date/football',  to: 'scoreapis#football', as: :football
 
-
-
+# Format of date is YYYY-MM-DD
+  get '/scores/:date/football/edit',  to: 'scoreapis#football_edit', as: :football_edit
+  post '/scores/:date/football/edit',  to: 'games#import', as: :football_import
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

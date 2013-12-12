@@ -1,0 +1,35 @@
+<%= form_tag football_import_path :method => :post do %>
+<div class="page-header">
+  <h1>Partits Dia Futbol</h1>
+  <%= submit_tag "Save" %>
+</div>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>'Id'</th>
+      <th>'Local'</th>
+      <th>'Visitant'</th>
+      <th>'Competicio'</th>
+      <th>'Dia'</th>
+      <th>'Hora'</th>
+      <th>'Minut'</th>
+      <th>'Create'</th>  
+    </tr>
+  </thead>
+  <tbody>
+    <% @games.each do |game| %>
+        <tr>
+          <td><%= text_field_tag 'toCreate[][id]', game['id'], :readonly => true %></td>
+          <td><%= text_field_tag 'toCreate[][local]', game['local'], :readonly => true %></td>
+          <td><%= text_field_tag 'toCreate[][visitor]', game['visitor'], :readonly => true %></td>
+          <td><%= text_field_tag 'toCreate[][competition_name]', game['competition_name'], :readonly => true %></td>
+          <td><%= text_field_tag 'toCreate[][date]', game['date'], :readonly => true %></td>
+          <td><%= text_field_tag 'toCreate[][hour]', game['hour'], :readonly => true %></td>
+          <td><%= text_field_tag 'toCreate[][minute]', game['minute'], :readonly => true %></td>
+          <td><%= check_box_tag 'toCreate[][create]', true %></td>
+        </tr>
+    <% end %>
+  </tbody>
+</table>
+<% end %>
+

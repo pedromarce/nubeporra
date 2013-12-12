@@ -15,16 +15,24 @@ class BetsController < ApplicationController
   def index
     @game = Game.find(params[:game_id])
     @bets = @game.bets
-
-    respond_to do |format|
-      format.html # index.html.erb
-    end
+    if !@game.closed? and @game.externalid
+      api = ScoreapisController.new
+      @data = api.football_game(@game.externalid)
+      if @data['status'].to_i > -1
+        @game.score1 = @data['local_goals']
+        @game.score2 = @data['visitor_goals']
+      end
+      if @data['status'].to_i == 1
+        @game.closed = true
+      end
+      @game.save
+    end        
   end
 
   # GET /bets/1
   # GET /bets/1.json
   def show
-    redirect_to game_bets_path, :game_id => params[:game_id]
+    redirect_to game_bets_path
   end
 
   # GET /bets/new

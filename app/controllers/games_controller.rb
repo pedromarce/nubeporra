@@ -82,4 +82,19 @@ class GamesController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  def import
+    @toCreate = params[:toCreate]
+    @toCreate.each do |data|
+      if data[:create]
+        game = Game.new({"typescore" => "Futbol", "numpoint" => "3", "numscore" => "2", "secondpoint" => "1" })
+        game.description = data[:local] + " - " + data[:visitor]
+        game.externalid = data[:id]
+        game.gameTime = DateTime.parse(data[:date]).change(hour: data[:hour].to_i - 1, min: data[:minute].to_i)
+        game.closeTime = game.gameTime - 15.minutes
+        game.save
+      end
+    end
+    redirect_to root_path
+  end
 end

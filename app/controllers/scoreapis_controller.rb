@@ -2,75 +2,57 @@ class ScoreapisController < ApplicationController
   include HTTParty
 
   def football
-    time = Time.now()
-    games = api_football(time.strftime('%Y-%m-%d'))
-    @games = games.parsed_response['matches'] if games.parsed_response['matches']
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @games }
+    if !params[:realDate]
+      @realDate = Time.now()
+    else 
+      @realDate = Date.new(params[:realDate][:year].to_i,params[:realDate][:month].to_i,params[:realDate][:day].to_i)
     end
-  end
-
-  def footballnext
-    time = Time.parse(params[:date]) + 1.days
-    games = api_football(time.strftime('%Y-%m-%d'))
+    @date = @realDate.strftime('%Y-%m-%d')
+    games = api_football('matchsday', 'date=' + @date)
     @games = games.parsed_response['matches'] if games.parsed_response['matches']
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @games }
-    end
-  end
-
-  def footballprev
-    time = Time.parse(params[:date]) - 1.days
-    games = api_football(time.strftime('%Y-%m-%d'))
-    @games = games.parsed_response['matches'] if games.parsed_response['matches']
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @games }
-    end
   end
 
   def nba
     @games = []
     games = api_nba(params[:date])
     @games = games.parsed_response['Schedule']['League']['Game'] if games.parsed_response['Schedule']['League']['Game']
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @games }
-    end
   end
 
-  def nbanext
-    @games = []
-    games = api_nba(params[:date])
-    @games = games.parsed_response['Schedule']['League']['Game'] if games.parsed_response['Schedule']['League']['Game']
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @games }
-    end
+  def football_game(game)
+    api_football('match','id=' + game.to_s).parsed_response
   end
 
-  def nbaprev
-    @games = []
-    games = api_nba(params[:date])
-    @games = games.parsed_response['Schedule']['League']['Game'] if games.parsed_response['Schedule']['League']['Game']
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @games }
+  def football_edit
+    games = api_football('matchsday', 'date=' + params[:date])
+    @games = games.parsed_response['matches'] if games.parsed_response['matches']
+  end
+
+  def close_games
+    gamesT = Game.arel_table
+    games = Game.where(gamesT[:closed].eq(false).or(gamesT[:closed].eq(nil)))
+    games.each do |game|
+      if game.externalid
+        logger.debug 'Externalid'
+        data = football_game(game.externalid)
+        if data['status'].to_i > -1
+          game.score1 = data['local_goals']
+          game.score2 = data['visitor_goals']
+        end
+        if data['status'].to_i == 1
+          game.closed = true
+        end
+        game.save
+      end        
     end
   end
 
   private
 
-   def api_football(date)
+   def api_football(req, param)
     base_uri = 'http://www.resultados-futbol.com/scripts/api/api.php'
     key_param = '5cdb0947a37e178f340b78576e90d058'
     format_param = 'json' 
-    HTTParty.get("#{base_uri}?key=#{key_param}&format=#{format_param}&req=matchsday&top=true&date=#{date}") 
+    HTTParty.get("#{base_uri}?key=#{key_param}&format=#{format_param}&req=#{req}&top=true&#{param}") 
   end
 
   def api_nba(date)

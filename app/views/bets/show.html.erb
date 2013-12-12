@@ -1,0 +1,42 @@
+<%- model_class = Bet -%>
+<div class="page-header">
+  <h1><%= @game.description %></h1>
+  <h2><%= @game.score %></h2>
+</div>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Punts</th>
+      <th>Jugador</th>
+      <th>Resultat</th>
+      <th>Jugada el</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @bets.each do |bet| %>
+    <tr   <% if bet.scored? %> 
+            class="success" 
+          <% elsif bet.secondscored?  %>
+            class="info" 
+          <% end %>>
+      <td><%= bet.user.numpoints %></td>
+      <td><%= bet.user.username %></td>
+      <td>
+        <%= bet.score1 %>
+        <% if @game.numscore >= 2 %>
+        - <%= bet.score2 %>
+        <% end %>
+        <% if @game.numscore >= 3 %>
+        - <%= bet.score3 %>
+        <% end %>
+      </td>
+      <td><%=l bet.created_at %></td>
+
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to "Tornar",
+home_path,
+:class => 'btn btn-primary' %>
