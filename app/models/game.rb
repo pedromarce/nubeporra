@@ -4,7 +4,7 @@ class Game < ActiveRecord::Base
   has_many :bets
  
   attr_accessible :externalid, :closeTime, :description, :gameTime, :score1, :score2, :score3, :typescore, :numscore, :numpoint, :closed, :boxing_id, :secondpoint
-
+  
   def userbet(user)
   	self.bets.where(:user_id => user).first
   end

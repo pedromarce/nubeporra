@@ -1,6 +1,6 @@
+- Add NBA to bulk import of games - Only missing check time created is correct and close of games work
 - Add closeTime to boxing or calculate it on the fly?
 - Add boxing to bulk import of games
-- Add NBA to bulk import of games
 - Investigate ACB option for bulk import
 - Add Champions league bet
 - Investigate other sports for bulk import and add them. NFL? NHL? Will they still work?

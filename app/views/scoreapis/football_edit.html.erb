@@ -19,6 +19,8 @@
   <tbody>
     <% @games.each do |game| %>
         <tr>
+          <%= hidden_field_tag 'toCreate[][typescore]', 'Futbol' %>
+          <%= hidden_field_tag 'toCreate[][numscore]', '2' %>
           <td><%= text_field_tag 'toCreate[][id]', game['id'], :readonly => true %></td>
           <td><%= text_field_tag 'toCreate[][local]', game['local'], :readonly => true %></td>
           <td><%= text_field_tag 'toCreate[][visitor]', game['visitor'], :readonly => true %></td>

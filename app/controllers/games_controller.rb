@@ -87,10 +87,15 @@ class GamesController < ApplicationController
     @toCreate = params[:toCreate]
     @toCreate.each do |data|
       if data[:create]
-        game = Game.new({"typescore" => "Futbol", "numpoint" => "3", "numscore" => "2", "secondpoint" => "1" })
+        game = Game.new({"numpoint" => "3", "secondpoint" => "1" })
+        game.typescore = data[:typescore]
+        game.numscore = data[:numscore]
         game.description = data[:local] + " - " + data[:visitor]
         game.externalid = data[:id]
-        game.gameTime = DateTime.parse(data[:date]).change(hour: data[:hour].to_i - 1, min: data[:minute].to_i)
+        if game.typescore == 'Futbol'
+          game.gameTime = DateTime.parse(data[:date]).change(hour: data[:hour].to_i - 1, min: data[:minute].to_i)
+        elsif game.typescore == 'Basquet'
+          game.gameTime = DateTime.parse(data[:date],data[:time])  
         game.closeTime = game.gameTime - 15.minutes
         game.save
       end

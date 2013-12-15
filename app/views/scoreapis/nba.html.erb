@@ -1,5 +1,9 @@
 <div class="page-header">
-  <h1>Partits Dia NBA</h1>
+  <h1><%= link_to "Partits Dia NBA", nba_edit_path(@offset) %></h1>
+  <%= form_tag nba_path, :method => :get do %>
+    <%= select_date @realDate, prefix: :realDate %> 
+    <%= submit_tag "Find" %>
+  <% end %>
 </div>
 <table class="table table-striped">
   <thead>

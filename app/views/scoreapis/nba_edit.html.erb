@@ -1,0 +1,33 @@
+<%= form_tag football_import_path :method => :post do %>
+
+  <div class="page-header">
+    <h1>Partits Dia NBA</h1>
+    <%= submit_tag "Save" %>
+  </div>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>'Id'</th>
+        <th>'Visitant'</th>
+        <th>'Local'</th>
+        <th>'Data'</th>
+        <th>'Data'</th>
+
+      </tr>
+    </thead>
+    <tbody>
+      <% @games.each do |game| %>
+        <tr>
+          <%= hidden_field_tag 'toCreate[][typescore]', 'Basquet' %>
+          <%= hidden_field_tag 'toCreate[][numscore]', '1' %>
+          <td><%= text_field_tag 'toCreate[][id]', game['id'], :readonly => true %></td>
+          <td><%= text_field_tag 'toCreate[][visitor]', game['AwayTeam']['name'], :readonly => true %></td>
+          <td><%= text_field_tag 'toCreate[][local]', game['HomeTeam']['name'], :readonly => true %></td>
+          <td><%= text_field_tag 'toCreate[][date]', game['gameDate'], :readonly => true %></td>
+          <td><%= text_field_tag 'toCreate[][time]', game['gameTime'], :readonly => true %></td>
+          <td><%= check_box_tag 'toCreate[][create]', true %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>

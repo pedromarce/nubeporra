@@ -24,6 +24,8 @@ Nubeporra::Application.routes.draw do
 
   # Format of date is Offset from Today's date
   get '/scores/:date/nba',  to: 'scoreapis#nba', as: :nba
+  get '/scores/:date/nba/edit',  to: 'scoreapis#nba_edit', as: :nba_edit
+  post '/scores/:date/nba/edit',  to: 'games#import', as: :nba_import
 
   # Format of date is YYYY-MM-DD
   get '/scores/:date/football',  to: 'scoreapis#football', as: :football
