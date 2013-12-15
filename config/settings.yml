@@ -1,4 +1,4 @@
-typeScore: ['Futbol', 'Futbol_Sala', 'Hoquei', 'Hoquei_Gel', 'Basquet', 'Handball', 'Rugby', 'Futbol_America', 'Formula1', 'MotoGP', 'Moto2', 'Moto3', 'Sorteig_Champions', 'Golejador']
+typeScore: ['Futbol', 'Futbol_Sala', 'Hoquei', 'Hoquei_Gel', 'Basquet', 'Handball', 'Rugby', 'Futbol_America', 'Formula1', 'MotoGP', 'Moto2', 'Moto3', 'Sorteig_Champions', 'Golejador','Ronda_Champions']
 
 Futbol: [0,1,2,3,4,5,6,7,8,9,10,11,12]
 

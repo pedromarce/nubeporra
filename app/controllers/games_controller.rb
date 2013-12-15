@@ -96,6 +96,7 @@ class GamesController < ApplicationController
           game.gameTime = DateTime.parse(data[:date]).change(hour: data[:hour].to_i - 1, min: data[:minute].to_i)
         elsif game.typescore == 'Basquet'
           game.gameTime = DateTime.parse(data[:date],data[:time])  
+        end
         game.closeTime = game.gameTime - 15.minutes
         game.save
       end
