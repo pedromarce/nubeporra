@@ -17,15 +17,7 @@ class BetsController < ApplicationController
     @bets = @game.bets
     if !@game.closed? and @game.externalid
       api = ScoreapisController.new
-      @data = api.football_game(@game.externalid)
-      if @data['status'].to_i > -1
-        @game.score1 = @data['local_goals']
-        @game.score2 = @data['visitor_goals']
-      end
-      if @data['status'].to_i == 1
-        @game.closed = true
-      end
-      @game.save
+      api.close_games
     end        
   end
 

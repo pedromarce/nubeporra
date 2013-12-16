@@ -62,10 +62,10 @@ class ScoreapisController < ApplicationController
         if game.typescore == "Basquet"
           logger.debug 'Externalid'
           data = nba_game(game.externalid)
-          if data['status'].to_i > 1
-            game.score1 = data['AwayTeam']['Score']['awayScore'].to_i - data['HomeTeam']['Score']['homeScore']
+          if data['boxscoreStatus'].to_i > 1
+            game.score1 = data['AwayTeam']['Score']['awayScore'].to_i - data['HomeTeam']['Score']['homeScore'].to_i
           end
-          if data['status'].to_i == 3
+          if data['boxscoreStatus'].to_i == 3
             game.closed = true
           end
         end

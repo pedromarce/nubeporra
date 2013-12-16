@@ -46,6 +46,7 @@ class GamesController < ApplicationController
 
     respond_to do |format|
       if @game.save
+        update_boxing_closeTime(@game)
         format.html { redirect_to @game, notice: 'Game was successfully created.' }
         format.json { render json: @game, status: :created, location: @game }
       else
@@ -62,6 +63,7 @@ class GamesController < ApplicationController
 
     respond_to do |format|
       if @game.update_attributes(params[:game])
+        update_boxing_closeTime(@game)
         format.html { redirect_to @game, notice: 'Game was successfully updated.' }
         format.json { head :no_content }
       else
@@ -87,20 +89,30 @@ class GamesController < ApplicationController
     @toCreate = params[:toCreate]
     @toCreate.each do |data|
       if data[:create]
-        game = Game.new({"numpoint" => "3", "secondpoint" => "1" })
-        game.typescore = data[:typescore]
-        game.numscore = data[:numscore]
+        game = Game.new(params[:game])
         game.description = data[:local] + " - " + data[:visitor]
         game.externalid = data[:id]
         if game.typescore == 'Futbol'
           game.gameTime = DateTime.parse(data[:date]).change(hour: data[:hour].to_i - 1, min: data[:minute].to_i)
         elsif game.typescore == 'Basquet'
-          game.gameTime = DateTime.parse(data[:date],data[:time])  
+          game.gameTime = DateTime.strptime(data[:date] + data[:time],'%Y-%m-%d%I:%M %p')  
         end
         game.closeTime = game.gameTime - 15.minutes
         game.save
-      end
+        update_boxing_closeTime(game)
+      end  
     end
     redirect_to root_path
+  end
+
+  def update_boxing_closeTime(game)
+    if game.boxing
+      boxingGames = game.boxing.games.sort_by { |boxingGame| boxingGame.closeTime }
+      closeTime = boxingGames[0].closeTime
+      game.boxing.games.each do |boxingGame|
+        boxingGame.closeTime = closeTime
+        boxingGame.save
+      end
+    end  
   end
 end
