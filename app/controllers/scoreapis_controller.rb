@@ -109,7 +109,7 @@ class ScoreapisController < ApplicationController
     gamesT = Game.arel_table
     games = Game.where(gamesT[:closed].eq(false).or(gamesT[:closed].eq(nil)))
     games.each do |game|
-      if game.externalid and !game.gameTime.past?
+      if game.externalid and game.gameTime.past?
         if game.typescore == 'Futbol'
           data = football_game(game.externalid)
           if data['status'].to_i > -1
