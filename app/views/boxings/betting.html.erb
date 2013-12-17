@@ -13,6 +13,7 @@
     <table class="table table-striped table-condensed table-bordered">
       <thead>
         <tr>
+          <th>Esport</th>
           <th>Description</th>
           <th>Score1</th>
           <th>Score2</th>
@@ -23,6 +24,7 @@
         <% @boxing.games.each do |game| %>
         <tr>
           <%= hidden_field_tag 'toCreate[][id]', game.id %>
+          <td><%= game.typescore %></td>
           <td><%= game.description %></td>
           <td><%= select_tag 'toCreate[][score1]', options_for_select(Settings[game.typescore], (game.userbet(current_user) ? game.userbet(current_user).score1 : nil)), include_blank: true %></td>
           <td>
