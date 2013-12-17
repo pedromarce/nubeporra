@@ -181,18 +181,18 @@ class ScoreapisController < ApplicationController
   end
 
   def api_acb(req, param)
-    acb = Nokogiri::HTML(HTTParty.get("http://www.elmundo.es/elmundodeporte/baloncesto/acb/calendario.html").parsed_response)
-    parse_el_mundo(acb)
+      acb = Nokogiri::HTML(HTTParty.get("http://www.elmundo.es/elmundodeporte/baloncesto/acb/calendario.html").parsed_response)
+      parse_el_mundo(acb)
   end
 
   def api_asobal(req, param)
-    asobal = Nokogiri::HTML(HTTParty.get("http://www.elmundo.es/elmundodeporte/balonmano/asobal/calendario.html").parsed_response)
-    parse_el_mundo(asobal)
+      asobal = Nokogiri::HTML(HTTParty.get("http://www.elmundo.es/elmundodeporte/balonmano/asobal/calendario.html").parsed_response)
+      parse_el_mundo(asobal)
   end
 
   def api_futsal(req, param)
-    futsal = Nokogiri::HTML(HTTParty.get("http://www.elmundo.es/elmundodeporte/futbol/futbol-sala/calendario.html").parsed_response)
-    parse_el_mundo(futsal)
+      futsal = Nokogiri::HTML(HTTParty.get("http://www.elmundo.es/elmundodeporte/futbol/futbol-sala/calendario.html").parsed_response)
+      parse_el_mundo(futsal)
   end
 
   def parse_el_mundo(html)
