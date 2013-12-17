@@ -49,9 +49,15 @@
           <td><%= game.closeTime %></td>
           <td>
             <% if game.boxing %>
-            <%= link_to game.boxing.description,
-            standing_boxing_path(game.boxing.id),
-            :class => 'btn btn-info' %>
+              <% if game.closeTime.past? %>
+                <%= link_to game.boxing.description,
+                standing_boxing_path(game.boxing.id),
+                :class => 'btn btn-info' %>
+              <% else %>
+                <%= link_to game.boxing.description,
+                betting_boxing_path(game.boxing.id),
+                :class => 'btn btn-info' %>
+              <% end %>
             <% end %>
           </td>  
         </tr>

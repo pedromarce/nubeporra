@@ -1,9 +1,6 @@
 Nubeporra::Application.routes.draw do
 
   resources :boxings do
-    member do
-      get 'standing'
-    end
   end
 
   devise_for :users
@@ -21,6 +18,11 @@ Nubeporra::Application.routes.draw do
   get '/home',     to: 'static_pages#home'
 
   get '/users/:id/bets',  to: 'bets#user'
+
+  get '/boxing/:id/standing',  to: 'boxings#standing', as: :standing_boxing
+  get '/boxing/:id/betting',  to: 'boxings#betting', as: :betting_boxing
+  post '/boxing/:id/betting',  to: 'boxings#import', as: :boxing_import
+
 
   # Format of date is YYYY-MM-DD
   get '/scores/acb',  to: 'scoreapis#acb', as: :acb

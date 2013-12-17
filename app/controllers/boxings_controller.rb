@@ -19,6 +19,14 @@ class BoxingsController < ApplicationController
     end
   end
 
+  def betting
+    @boxing = Boxing.find(params[:id])
+    respond_to do |format|
+      format.html # show.html.erb
+      format.json { render json: @boxing }
+    end
+  end
+
   # GET /boxings/1
   # GET /boxings/1.json
   def show
@@ -87,5 +95,22 @@ class BoxingsController < ApplicationController
       format.html { redirect_to boxings_url }
       format.json { head :no_content }
     end
+  end
+
+  def import
+    @toCreate = params[:toCreate]
+    @toCreate.each do |data|
+      if data[:score1]
+        game = Game.find(data[:id])
+        bet = (game.userbet(current_user) ? game.userbet(current_user) : Bet.new)
+        bet.user = current_user
+        bet.game = game
+        bet.score1 = data[:score1]
+        bet.score2 = data[:score2]
+        bet.score3 = data[:score3]
+        bet.save
+      end
+    end    
+    redirect_to :home
   end
 end

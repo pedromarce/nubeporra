@@ -1,0 +1,47 @@
+<%- model_class = Boxing -%>
+
+<%= form_tag boxing_import_path :method => :post do %>
+
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.titleize %></h1>
+  <h2><%= @boxing.description %></h2>
+  <%= submit_tag "Save" %></span>
+</div>
+
+<div class="row">
+  <div class="span4">
+    <table class="table table-striped table-condensed table-bordered">
+      <thead>
+        <tr>
+          <th>Description</th>
+          <th>Score1</th>
+          <th>Score2</th>
+          <th>Score3</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @boxing.games.each do |game| %>
+        <tr>
+          <%= hidden_field_tag 'toCreate[][id]', game.id %>
+          <td><%= game.description %></td>
+          <td><%= select_tag 'toCreate[][score1]', options_for_select(Settings[game.typescore], (game.userbet(current_user) ? game.userbet(current_user).score1 : nil)), include_blank: true %></td>
+          <td>
+            <% if game.numscore >= 2 %>
+              <%= select_tag 'toCreate[][score2]', options_for_select(Settings[game.typescore], (game.userbet(current_user) ? game.userbet(current_user).score2 : nil)), include_blank: true %>
+            <% end %>
+          </td>
+          <td>
+            <% if game.numscore >= 3 %>
+              <%= select_tag 'toCreate[][score3]', options_for_select(Settings[game.typescore], (game.userbet(current_user) ? game.userbet(current_user).score3 : nil)), include_blank: true %>
+            <% end %>
+          </td>
+        </tr>
+        <% end %>
+
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<% end %>
+
