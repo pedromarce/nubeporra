@@ -1,0 +1,36 @@
+<%= form_tag futsal_import_path :method => :post do %>
+
+  <div class="page-header">
+    <h1>Partits Dia FUTSAL</h1>
+    <span>Boxing<%= collection_select(:game, :boxing_id, Boxing.all, :id, :description, options={:include_blank => true, :class => "selectpicker"}) %>
+      <%= hidden_field :game, :typescore, :value => 'Futbol_Sala' %>
+      <%= hidden_field :game, :numscore, :value => '2' %>
+      <%= hidden_field :game, :numpoint, :value => '3' %>
+      <%= hidden_field :game, :secondpoint, :value => '1' %>
+    <%= submit_tag "Save" %></span>
+  </div>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>'Id'</th>
+        <th>'Visitant'</th>
+        <th>'Local'</th>
+        <th>'Data'</th>
+        <th>'Data'</th>
+
+      </tr>
+    </thead>
+    <tbody>
+      <% @games.each do |game| %>
+        <tr>
+          <td><%= text_field_tag 'toCreate[][id]', game['id'], :readonly => true %></td>
+          <td><%= text_field_tag 'toCreate[][local]', game['home'], :readonly => true %></td>
+          <td><%= text_field_tag 'toCreate[][visitor]', game['away'], :readonly => true %></td>
+          <td><%= text_field_tag 'toCreate[][date]', game['date'], :readonly => true %></td>
+          <td><%= text_field_tag 'toCreate[][time]', game['time'], :readonly => true %></td>
+          <td><%= check_box_tag 'toCreate[][create]', true %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>

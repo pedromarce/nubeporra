@@ -96,7 +96,18 @@ class GamesController < ApplicationController
           game.gameTime = DateTime.parse(data[:date]).change(hour: data[:hour].to_i - 1, min: data[:minute].to_i)
         elsif game.typescore == 'Basquet'
           game.gameTime = DateTime.strptime(data[:date] + data[:time],'%Y-%m-%d%I:%M %p')  
+        elsif game.typescore == 'Acb'
+          game.typescore = 'Basquet'
+          game.gameTime = DateTime.strptime(data[:date] + data[:time],'%Y-%m-%d%H:%Mh')
+          game.gameTime = game.gameTime - 1.hour  
+        elsif game.typescore == 'Futbol_Sala'
+          game.gameTime = DateTime.strptime(data[:date] + data[:time],'%Y-%m-%d%H:%Mh')
+          game.gameTime = game.gameTime - 1.hour  
+        elsif game.typescore == 'Handball'
+          game.gameTime = DateTime.strptime(data[:date] + data[:time],'%Y-%m-%d%H:%Mh')
+          game.gameTime = game.gameTime - 1.hour  
         end
+
         game.closeTime = game.gameTime - 15.minutes
         game.save
         update_boxing_closeTime(game)

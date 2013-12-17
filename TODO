@@ -1,6 +1,5 @@
-- Add closeTime to boxing or calculate it on the fly?
-- Add boxing to bulk import of games
+- Add better interface for boxing bets
+- Add current games screen (with temporary score updated)
 - Investigate ACB option for bulk import
-- Add Champions league bet
 - Investigate other sports for bulk import and add them. NFL? NHL? Will they still work?
 - Investigate other sports for bulk import Futsal, Asobal.

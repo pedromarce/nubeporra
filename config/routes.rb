@@ -22,17 +22,32 @@ Nubeporra::Application.routes.draw do
 
   get '/users/:id/bets',  to: 'bets#user'
 
+  # Format of date is YYYY-MM-DD
+  get '/scores/acb',  to: 'scoreapis#acb', as: :acb
+  get '/scores/:date/acb/edit',  to: 'scoreapis#acb_edit', as: :acb_edit
+  post '/scores/acb/edit',  to: 'games#import', as: :acb_import
+
+  # Format of date is YYYY-MM-DD
+  get '/scores/asobal',  to: 'scoreapis#asobal', as: :asobal
+  get '/scores/:date/asobal/edit',  to: 'scoreapis#asobal_edit', as: :asobal_edit
+  post '/scores/asobal/edit',  to: 'games#import', as: :asobal_import
+
+ # Format of date is YYYY-MM-DD
+  get '/scores/futsal',  to: 'scoreapis#futsal', as: :futsal
+  get '/scores/:date/futsal/edit',  to: 'scoreapis#futsal_edit', as: :futsal_edit
+  post '/scores/futsal/edit',  to: 'games#import', as: :futsal_import
+
   # Format of date is Offset from Today's date
-  get '/scores/:date/nba',  to: 'scoreapis#nba', as: :nba
+  get '/scores/nba',  to: 'scoreapis#nba', as: :nba
   get '/scores/:date/nba/edit',  to: 'scoreapis#nba_edit', as: :nba_edit
   post '/scores/:date/nba/edit',  to: 'games#import', as: :nba_import
 
   # Format of date is YYYY-MM-DD
-  get '/scores/:date/football',  to: 'scoreapis#football', as: :football
+  get '/scores/football',  to: 'scoreapis#football', as: :football
 
 # Format of date is YYYY-MM-DD
-  get '/scores/:date/football/edit',  to: 'scoreapis#football_edit', as: :football_edit
-  post '/scores/:date/football/edit',  to: 'games#import', as: :football_import
+  get '/scores/:offset/football/edit',  to: 'scoreapis#football_edit', as: :football_edit
+  post '/scores/:offset/football/edit',  to: 'games#import', as: :football_import
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

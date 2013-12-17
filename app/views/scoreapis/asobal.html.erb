@@ -1,0 +1,26 @@
+<div class="page-header">
+  <h1><%= link_to "Partits Dia ASOBAL", asobal_edit_path(@date) %></h1>
+  <%= form_tag asobal_path, :method => :get do %>
+    <%= select_date @realDate, prefix: :realDate %> 
+    <%= submit_tag "Find" %>
+  <% end %>
+</div>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>'Visitant'</th>
+      <th>'Local'</th>
+      <th>'Resultat'</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @games.each do |game| %>
+      <tr>
+        <td><%= game['home'] %></td>
+        <td><%= game['away'] %></td>
+        <td><%= game['homeScore'] %>  - <%= game['awayScore'] %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
