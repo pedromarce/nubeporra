@@ -105,9 +105,9 @@ class BoxingsController < ApplicationController
         bet = (game.userbet(current_user) ? game.userbet(current_user) : Bet.new)
         bet.user = current_user
         bet.game = game
-        bet.score1 = data[:score1]
-        bet.score2 = data[:score2]
-        bet.score3 = data[:score3]
+        bet.score1 = (data[:score1] ? data[:score1] : '')
+        bet.score2 = (data[:score2] ? data[:score2] : '')
+        bet.score3 = (data[:score3] ? data[:score3] : '')
         bet.save
       end
     end    

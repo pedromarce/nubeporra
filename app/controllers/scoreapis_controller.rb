@@ -109,8 +109,8 @@ class ScoreapisController < ApplicationController
     gamesT = Game.arel_table
     games = Game.where(gamesT[:closed].eq(false).or(gamesT[:closed].eq(nil)))
     games.each do |game|
-      if game.externalid 
-        if game.typescore == "Futbol"
+      if game.externalid and !game.gameTime.past?
+        if game.typescore == 'Futbol'
           data = football_game(game.externalid)
           if data['status'].to_i > -1
             game.score1 = data['local_goals']
@@ -120,7 +120,7 @@ class ScoreapisController < ApplicationController
             game.closed = true
           end
         end
-        if game.typescore == "Futbol_Sala"
+        if game.typescore == 'Futbol_Sala'
           data = futsal_game(game.externalid)
           if data['homeScore'] != ''
             game.score1 = data['homeScore'].to_i 
@@ -130,7 +130,7 @@ class ScoreapisController < ApplicationController
             game.closed = true
           end
         end
-        if game.typescore == "Handball"
+        if game.typescore == 'Handball'
           data = asobal_game(game.externalid)
           if data['homeScore'] != ''
             game.score1 = data['homeScore'].to_i - data['awayScore'].to_i
@@ -139,7 +139,7 @@ class ScoreapisController < ApplicationController
             game.closed = true
           end
         end
-        if game.typescore == "Basquet"
+        if game.typescore == 'Basquet'
           if game.externalid[0..6] == 'ELMUNDO'
             data = acb_game(game.externalid)
             if data['homeScore'] != ''
@@ -161,7 +161,7 @@ class ScoreapisController < ApplicationController
         end        
         game.save
       end
-    end
+    end 
   end
 
   private

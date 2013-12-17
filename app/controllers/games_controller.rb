@@ -107,7 +107,9 @@ class GamesController < ApplicationController
           game.gameTime = DateTime.strptime(data[:date] + data[:time],'%Y-%m-%d%H:%Mh')
           game.gameTime = game.gameTime - 1.hour  
         end
-
+        game.score1 = ''
+        game.score2 = ''
+        game.score3 = ''
         game.closeTime = game.gameTime - 15.minutes
         game.save
         update_boxing_closeTime(game)
