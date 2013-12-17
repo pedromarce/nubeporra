@@ -181,18 +181,24 @@ class ScoreapisController < ApplicationController
   end
 
   def api_acb(req, param)
+    Rails.cache.fetch("api_acb", :expires_in => 5.minutes) do
       acb = Nokogiri::HTML(HTTParty.get("http://www.elmundo.es/elmundodeporte/baloncesto/acb/calendario.html").parsed_response)
       parse_el_mundo(acb)
+    end
   end
 
   def api_asobal(req, param)
+    Rails.cache.fetch("api_asobal", :expires_in => 5.minutes) do
       asobal = Nokogiri::HTML(HTTParty.get("http://www.elmundo.es/elmundodeporte/balonmano/asobal/calendario.html").parsed_response)
       parse_el_mundo(asobal)
+    end
   end
 
   def api_futsal(req, param)
+    Rails.cache.fetch("api_futsal", :expires_in => 5.minutes) do
       futsal = Nokogiri::HTML(HTTParty.get("http://www.elmundo.es/elmundodeporte/futbol/futbol-sala/calendario.html").parsed_response)
       parse_el_mundo(futsal)
+    end  
   end
 
   def parse_el_mundo(html)
