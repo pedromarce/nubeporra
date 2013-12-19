@@ -6,11 +6,19 @@ class Bet < ActiveRecord::Base
   attr_accessible :betTime, :score1, :score2, :score3
 
   def scored?
-    return (self.game.closed? and self.game.score1 == self.score1 and (self.game.numscore < 2 or self.game.score2 == self.score2) and (self.game.numscore < 3 or self.game.score3 == self.score3)) 
+    return checkScored(true)
   end
 
   def secondscored?
-    if !self.game.closed?
+    return checkScored(true)
+  end
+
+  def checkScored(closed)
+    return (self.game.closed? == closed and self.game.score1 == self.score1 and (self.game.numscore < 2 or self.game.score2 == self.score2) and (self.game.numscore < 3 or self.game.score3 == self.score3)) 
+  end
+
+  def checkSecondScored(closed)
+    if self.game.closed? != closed
       return false
     end
     case self.game.typescore
@@ -35,17 +43,16 @@ class Bet < ActiveRecord::Base
     end
   end
 
-  def secondpoint
-    if !self.game.closed?
+  def secondpoint(closed)
+    if self.game.closed? != closed
       return 0
     end
     case self.game.typescore
       when 'Sorteig_Champions'
         return ((self.game.score1 == self.score1 ? self.game.secondpoint : 0) + (self.game.score2 == self.score2 ? self.game.secondpoint : 0) + (self.game.score3 == self.score3 ? self.game.secondpoint : 0)) 
       else
-        return (self.secondscored? ? self.game.secondpoint : 0)
+        return (checkSecondScored(closed) ? self.game.secondpoint : 0)
     end
-  
   end
 
 
@@ -62,10 +69,20 @@ class Bet < ActiveRecord::Base
 
   def totalpoints
     points = 0
-    if self.scored?
+    if self.checkScored(true)
       points = self.game.numpoint
-    elsif self.secondscored?
-      points = self.secondpoint
+    elsif self.checkSecondScored(true)
+      points = self.secondpoint(true)
+    end
+    points
+  end
+
+  def totalpointsopen
+    points = 0
+    if self.checkScored(false)
+      points = self.game.numpoint
+    elsif self.checkSecondScored(false)
+      points = self.secondpoint(false)
     end
     points
   end

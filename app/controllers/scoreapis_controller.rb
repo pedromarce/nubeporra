@@ -116,7 +116,7 @@ class ScoreapisController < ApplicationController
             game.score1 = data['local_goals']
             game.score2 = data['visitor_goals']
           end
-          if data['status'].to_i == 1
+          if game.gameTime < 4.hours.ago
             game.closed = true
           end
         end
@@ -126,7 +126,7 @@ class ScoreapisController < ApplicationController
             game.score1 = data['homeScore'].to_i 
             game.score2 = data['awayScore'].to_i
           end
-          if game.gameTime + 3.hour < DateTime.now
+          if game.gameTime < 4.hours.ago
             game.closed = true
           end
         end
@@ -135,7 +135,7 @@ class ScoreapisController < ApplicationController
           if data['homeScore'] != ''
             game.score1 = data['homeScore'].to_i - data['awayScore'].to_i
           end
-          if game.gameTime + 3.hour < DateTime.now
+          if game.gameTime < 4.hours.ago
             game.closed = true
           end
         end
@@ -145,7 +145,7 @@ class ScoreapisController < ApplicationController
             if data['homeScore'] != ''
               game.score1 = data['homeScore'].to_i - data['awayScore'].to_i
             end
-            if game.gameTime + 3.hour < DateTime.now
+            if game.gameTime < 4.hours.ago
               game.closed = true
             end
           else
@@ -153,7 +153,7 @@ class ScoreapisController < ApplicationController
               if data['boxscoreStatus'].to_i > 1
                 game.score1 = data['AwayTeam']['Score']['awayScore'].to_i - data['HomeTeam']['Score']['homeScore'].to_i
               end
-              if data['boxscoreStatus'].to_i == 3
+              if game.gameTime < 4.hours.ago
                 game.closed = true
               end
             end 

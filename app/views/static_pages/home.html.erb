@@ -15,12 +15,7 @@
       </thead>
       <tbody>
         <% @games.each do |game| %>
-        <tr 
-          <% if game.userbet(current_user) and game.userbet(current_user).scored? %> 
-            class="success" 
-          <% elsif game.userbet(current_user) and game.userbet(current_user).secondscored?  %>
-            class="info" 
-          <% end %>>
+        <tr>
           <td>
             <% if game.closeTime.past? %>
             <%= link_to 'Tancat',
@@ -38,7 +33,13 @@
             <% end %>
             <% end %>  
           </td>
-          <td><%= game.description %></td>
+          <td><%= game.description %>
+              <% if game.userbet(current_user) and game.userbet(current_user).scored? %> 
+                <span class="badge">+<%= game.numpoint %></span>
+              <% elsif game.userbet(current_user) and game.userbet(current_user).secondscored?  %>
+                <span class="badge">+<%= game.secondpoint %></span>
+              <% end %>
+          </td>
           <td>
             <% if game.userbet(current_user) %>
             <%= game.userbet(current_user).score %>
