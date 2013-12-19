@@ -10,7 +10,7 @@ class Bet < ActiveRecord::Base
   end
 
   def secondscored?
-    return checkScored(true)
+    return checkSecondScored(true)
   end
 
   def checkScored(closed)
