@@ -21,7 +21,7 @@
         </tr>
       </thead>
       <tbody>
-        <% @boxing.games.each do |game| %>
+        <% @boxing.games.order('"gameTime"').each do |game| %>
         <tr>
           <%= hidden_field_tag 'toCreate[][id]', game.id %>
           <td><%= game.typescore %></td>
