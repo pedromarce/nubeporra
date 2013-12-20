@@ -9,10 +9,16 @@
         </tr>
       </thead>
       <tbody>
-        <% @standings.each do |user| %>
+        <% @standings.each_with_index do |user, index| %>
         <tr>
-          <td><%= user.username %></td>
-          <td><%= user.numpoints + user.openpoints %>
+          <td><%= user.username %>
+              <% if user.position - index > 0 %>
+                <span class="badge">+<%= user.position - index %></span>
+              <% elsif user.position - index < 0 %>
+                <span class="badge"><%= user.position - index %></span>
+              <% end %>
+            </td>
+          <td><%= user.provpoints %>
               <% if user.openpoints > 0 %>
                 <span class="badge">+<%= user.openpoints %></span>
               <% end %>
