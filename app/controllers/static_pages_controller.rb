@@ -17,4 +17,16 @@ class StaticPagesController < ApplicationController
     end
     @standings = currstandings.sort_by { |user| user.provpoints * -1}
   end
+
+  def analysis
+    @typescore = params[:typescore]
+    games = Game.where(:typescore => @typescore)
+    currstandings = User.all.includes(:bets => {:game => :bets}).sort_by { |user| user.numpoints * -1 }
+    currstandings.each_with_index do |user, index|
+      user.position = index
+      user.provpoints = user.bets.where(:game_id => games).reduce(0) { |points,bet| points += bet.totalpoints }
+    end
+    @standings = currstandings.sort_by { |user| user.provpoints * -1}
+  end
+
 end

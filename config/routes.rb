@@ -17,6 +17,7 @@ Nubeporra::Application.routes.draw do
 
   get '/home',     to: 'static_pages#home'
   get '/live',     to: 'static_pages#live'
+  get '/analysis',     to: 'static_pages#analysis'
 
   get '/users/:id/bets',  to: 'bets#user'
 
