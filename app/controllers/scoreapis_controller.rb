@@ -151,7 +151,7 @@ class ScoreapisController < ApplicationController
           else
             if data = nba_game(game.externalid)
               if data['boxscoreStatus'].to_i > 1
-                game.score1 = data['AwayTeam']['Score']['awayScore'].to_i - data['HomeTeam']['Score']['homeScore'].to_i
+                game.score1 = data['HomeTeam']['Score']['awayScore'].to_i - data['AwayTeam']['Score']['homeScore'].to_i
               end
               if game.gameTime < 4.hours.ago
                 game.closed = true
