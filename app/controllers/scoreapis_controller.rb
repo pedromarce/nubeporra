@@ -63,7 +63,10 @@ class ScoreapisController < ApplicationController
   end
 
   def football_game(gameId)
-    api_football('match','id=' + gameId.to_s).parsed_response
+    game = Game.find(gameId)
+    @date = game.gameTime.strftime('%Y-%m-%d')
+    games = api_football('matchsday', 'date=' + @date)
+    @games = games.parsed_response['matches'].select{|result| result['id'] == game.externalid}[0] if games.parsed_response['matches']
   end
 
   def acb_edit
@@ -111,10 +114,11 @@ class ScoreapisController < ApplicationController
     games.each do |game|
       if game.externalid and game.gameTime.past?
         if game.typescore == 'Futbol'
-          data = football_game(game.externalid)
+          data = football_game(game.id)
           if data['status'].to_i > -1
-            game.score1 = data['local_goals']
-            game.score2 = data['visitor_goals']
+            result = data['result'].split('-')
+            game.score1 = result[0]
+            game.score2 = result[1]
           end
           if game.gameTime < 4.hours.ago
             game.closed = true
@@ -167,10 +171,10 @@ class ScoreapisController < ApplicationController
   private
 
   def api_football(req, param)
-    base_uri = 'http://www.resultados-futbol.com/scripts/api/api.php'
-    key_param = '5cdb0947a37e178f340b78576e90d058'
-    format_param = 'json' 
-    HTTParty.get("#{base_uri}?key=#{key_param}&format=#{format_param}&req=#{req}&top=true&#{param}") 
+      base_uri = 'http://www.resultados-futbol.com/scripts/api/api.php'
+      key_param = '5cdb0947a37e178f340b78576e90d058'
+      format_param = 'json' 
+      HTTParty.get("#{base_uri}?key=#{key_param}&format=#{format_param}&req=#{req}&top=true&#{param}") 
   end
 
   def api_nba(req, param)
@@ -181,21 +185,21 @@ class ScoreapisController < ApplicationController
   end
 
   def api_acb(req, param)
-    Rails.cache.fetch("api_acb", :expires_in => 5.minutes) do
+    Rails.cache.fetch("api_acb", :expires_in => 1.minute) do
       acb = Nokogiri::HTML(HTTParty.get("http://www.elmundo.es/elmundodeporte/baloncesto/acb/calendario.html").parsed_response)
       parse_el_mundo(acb)
     end
   end
 
   def api_asobal(req, param)
-    Rails.cache.fetch("api_asobal", :expires_in => 5.minutes) do
+    Rails.cache.fetch("api_asobal", :expires_in => 1.minute) do
       asobal = Nokogiri::HTML(HTTParty.get("http://www.elmundo.es/elmundodeporte/balonmano/asobal/calendario.html").parsed_response)
       parse_el_mundo(asobal)
     end
   end
 
   def api_futsal(req, param)
-    Rails.cache.fetch("api_futsal", :expires_in => 5.minutes) do
+    Rails.cache.fetch("api_futsal", :expires_in => 1.minute) do
       futsal = Nokogiri::HTML(HTTParty.get("http://www.elmundo.es/elmundodeporte/futbol/futbol-sala/calendario.html").parsed_response)
       parse_el_mundo(futsal)
     end  
